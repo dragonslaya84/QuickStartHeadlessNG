@@ -31,11 +31,11 @@ namespace QuickStart
 
         public void ButtonChangeScene()
         {
-            if (isServer)
+            if (IsServer)
             {
                 Scene scene = SceneManager.GetActiveScene();
-                if (scene.name == "MyScene") { NetworkManager.singleton.ServerChangeScene("MyOtherScene"); }
-                else { NetworkManager.singleton.ServerChangeScene("MyScene"); }
+                if (scene.name == "MyScene") { NetIdentity.ServerObjectManager.networkSceneManager.ChangeServerScene("MyOtherScene"); }
+                else { NetIdentity.ServerObjectManager.networkSceneManager.ChangeServerScene("MyScene"); }
             }
             else
             {

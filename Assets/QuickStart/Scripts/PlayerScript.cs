@@ -1,9 +1,5 @@
 ﻿using UnityEngine;
 using Mirror;
-using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Linq;
 
 // www.StephenAllenGames.co.uk  JesusLuvsYooh
 
@@ -64,12 +60,12 @@ namespace QuickStart
             {
                 weaponArray[_New].SetActive(true);
                 activeWeapon = weaponArray[activeWeaponSynced].GetComponent<Weapon>();
-                if (isLocalPlayer) { sceneScript.UIAmmo(activeWeapon.weaponAmmo); }
+                if (IsLocalPlayer) { sceneScript.UIAmmo(activeWeapon.weaponAmmo); }
             }
         }
         
         
-        public override void OnStartLocalPlayer()
+        public void OnStartLocalPlayer()
         {
             sceneScript.playerScript = this;
 
@@ -93,17 +89,19 @@ namespace QuickStart
             sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;
             if (selectedWeaponLocal < weaponArray.Length && weaponArray[selectedWeaponLocal] != null)
             { activeWeapon = weaponArray[selectedWeaponLocal].GetComponent<Weapon>(); sceneScript.UIAmmo(activeWeapon.weaponAmmo); }
+
+            NetIdentity.OnStartLocalPlayer.AddListener(OnStartLocalPlayer);
         }
 
 
-        [Command]
+        [ServerRpc]
         public void CmdSendPlayerMessage()
         {
             if (sceneScript) { sceneScript.statusText = playerName + " says hello " + UnityEngine.Random.Range(10, 99); }
         }
         
 
-        [Command]
+        [ServerRpc]
         public void CmdSetupPlayer(string _name, Color _col)
         {
             //player info sent to server, then server updates sync vars which handles it on all clients
@@ -116,13 +114,13 @@ namespace QuickStart
         void Update()
         {
             //allow all players to run this
-            if (isLocalPlayer == false)
+            if (IsLocalPlayer == false)
             {
                 floatingInfo.transform.LookAt(Camera.main.transform);
             }
 
             //only our own player runs below here
-            if (!isLocalPlayer) { return; }
+            if (!IsLocalPlayer) { return; }
 
             float moveX = Input.GetAxis("Horizontal") * Time.deltaTime * 110.0f;
             float moveZ = Input.GetAxis("Vertical") * Time.deltaTime * 4f;
@@ -157,7 +155,7 @@ namespace QuickStart
         }
 
 
-        [Command]
+        [ServerRpc]
         void CmdShootRay()
         {
             RpcFireWeapon();
@@ -174,7 +172,7 @@ namespace QuickStart
         }
         
         
-        [Command]
+        [ServerRpc]
         public void CmdChangeActiveWeapon(int _activeWeaponSynced)
         {
             activeWeaponSynced = _activeWeaponSynced;
