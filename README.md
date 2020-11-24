@@ -4,17 +4,18 @@
 
 # Running headless server or client
 
-Inside terminal/cmd console, add these.
-
-Type 0 for default or none
-
+Inside terminal/cmd console, add the complete line, type 0 for default or none.
 File Location - Client/Sever - frameRate - hostIP - hostPort - traffic
-
-Traffic 0=none   1=light (card game)  2=active (social game)  3=heavy (mmo)   4=frequent (fps)
-            
-
-Example of server:
+      
+Example of server arguements:
 C:\Users\localion\QuickStartHeadless s 15 0 0 0
 
-Example of client
-C:\Users\localion\QuickStartHeadless c 15 123.123.123.123 7777 0 3
+Example of client arguements"
+C:\Users\localion\QuickStartHeadless c 15 123.123.123.123 0 0 3
+
+# Traffic explanation
+- 0 = none
+- 1 = light (card game)  (some cmd/rpcs)
+- 2 = active (social game)  (a few cmd/rpcs + player movement) 
+- 3 = heavy (mmo)  (many cmd/rpcs + player movement) 
+- 4 = frequent (fps)  (lots of cmd/rpcs + player movement) 
