@@ -2,9 +2,10 @@
  The public quickstart guide, modified to be headless server and client, converted to MirrorNG
  
  The quickstart is how it sounds, to get a user up and running with a multiplayer scene.
- It is client authority based, contains very few comments or explanations, and doesnt follow 'best practises', for example firing physical objects rather than raycasting. But it servers its purpose of being a template with basic mirror multiplayer features.  :)
+ It is client authority based, contains very few comments or explanations, and doesnt follow 'best practises', for example firing physical objects rather than raycasting.
+ But it serves its purpose of being a template with basic mirror multiplayer features.  :)
 
- Guide located here:
+ Original Guide located here:
  https://mirror-networking.com/docs/Articles/CommunityGuides/MirrorQuickStartGuide/index.html
  
 
