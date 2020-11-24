@@ -3,6 +3,7 @@ using System.Collections;
 using Mirror.KCP;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using Mirror.ENet;
 
 namespace Mirror.HeadlessBenchmark
 {
@@ -201,6 +202,45 @@ namespace Mirror.HeadlessBenchmark
                 kcpTransport = newTransport;
             }
 
+            if (transport != null && transport.Equals("enet"))
+            {
+                IgnoranceNG newTransport = networkManager.gameObject.AddComponent<IgnoranceNG>();
+
+                //Try to apply port if exists and needed by transport.
+                if (!string.IsNullOrEmpty(port))
+                {
+                    newTransport.Config.CommunicationPort = ushort.Parse(port);
+                }
+
+                networkManager.server.transport = newTransport;
+                networkManager.client.Transport = newTransport;
+            }
+
+            if (transport != null && transport.Equals("libuv2k"))
+            {
+                KcpTransport newTransport = networkManager.gameObject.AddComponent<KcpTransport>();
+
+                //Try to apply port if exists and needed by transport.
+                if (!string.IsNullOrEmpty(port))
+                {
+                    newTransport.Port = ushort.Parse(port);
+                }
+                networkManager.server.transport = newTransport;
+                networkManager.client.Transport = newTransport;
+            }
+
+            if (transport != null && transport.Equals("litelib"))
+            {
+                KcpTransport newTransport = networkManager.gameObject.AddComponent<KcpTransport>();
+
+                //Try to apply port if exists and needed by transport.
+                if (!string.IsNullOrEmpty(port))
+                {
+                    newTransport.Port = ushort.Parse(port);
+                }
+                networkManager.server.transport = newTransport;
+                networkManager.client.Transport = newTransport;
+            }
         }
 
         string GetArgValue(string name)

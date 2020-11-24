@@ -7,6 +7,16 @@
       "dependencies": {},
       "hash": "a2eb75df681a841351eadd8fd2f9fb31a63294fc"
     },
+    "com.mirrorng.enet": {
+      "version": "https://github.com/MirrorNG/IgnoranceNG.git?path=/Assets/Mirror/Runtime/Transport/Ignorance",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.cysharp.unitask": "2.0.36",
+        "com.mirrorng.mirrorng": "54.1.1"
+      },
+      "hash": "060933568af99e2be5e7c3b87be87c149f3a987d"
+    },
     "com.mirrorng.mirrorng": {
       "version": "https://github.com/MirrorNG/MirrorNG.git?path=/Assets/Mirror",
       "depth": 0,
