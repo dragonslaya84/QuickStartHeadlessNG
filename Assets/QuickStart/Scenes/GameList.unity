@@ -43,7 +43,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 11
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -98,8 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: bc9a5619ef7d8e54ea79b6581c3c4dda,
-    type: 2}
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -119,8 +118,6 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-    maxJobWorkers: 0
-    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -464,6 +461,94 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1359728596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3514731670737574378, guid: bae8eccd8cd4a4aeda7bb2343d4c321d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1938740706}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1359728600 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8886348169724755207, guid: bae8eccd8cd4a4aeda7bb2343d4c321d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1938740706}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359728596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b750203ddb2d9f84abd799a5c2c32cb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1359728601 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8182985097174544173, guid: bae8eccd8cd4a4aeda7bb2343d4c321d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1938740706}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359728596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2cbc85c1c2f1c249bbe95ae110bbcde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1359728602 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 900059337203968083, guid: bae8eccd8cd4a4aeda7bb2343d4c321d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1938740706}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359728596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30967dfd80dbb6c46a270a64ebecb951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1359728603 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2485347781113897125, guid: bae8eccd8cd4a4aeda7bb2343d4c321d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1938740706}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359728596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f5ec068f5604c32b160bc49ee97b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1359728604 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7281894880448912304, guid: bae8eccd8cd4a4aeda7bb2343d4c321d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1938740706}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359728596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abe6be14204d94224a3e7cd99dd2ea73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1359728607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359728596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7aaac73a16c040fd871cb977b5c557b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  client: {fileID: 1359728604}
+  server: {fileID: 1359728603}
+  sceneManager: {fileID: 1359728602}
+  clientObjectManager: {fileID: 1359728601}
+  serverObjectManager: {fileID: 1359728600}
+  playerPrefab: {fileID: 3105541664355310574, guid: 964e9613f4a464cf6a0517eef7bf0b98,
+    type: 3}
+  startPositionIndex: 0
+  startPositions: []
+  playerSpawnMethod: 0
 --- !u!1 &1546437518
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +632,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1807184900}
-        m_TargetAssemblyTypeName: 
         m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
@@ -573,7 +657,6 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -648,7 +731,6 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -725,6 +807,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1938740714, guid: bae8eccd8cd4a4aeda7bb2343d4c321d, type: 3}
+      propertyPath: editorArgs
+      value: -transport kcp -server -port 3333 -frameRate 30 -traffic 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3514731670737574378, guid: bae8eccd8cd4a4aeda7bb2343d4c321d,
         type: 3}
       propertyPath: m_Name

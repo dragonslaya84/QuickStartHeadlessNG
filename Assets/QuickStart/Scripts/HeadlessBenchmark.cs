@@ -3,7 +3,6 @@ using System.Collections;
 using Mirror.KCP;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
-using Mirror.ENet;
 
 namespace Mirror.HeadlessBenchmark
 {
@@ -78,6 +77,8 @@ namespace Mirror.HeadlessBenchmark
         void OnServerStarted()
         {
             StartCoroutine(DisplayFramesPerSecons());
+            
+            GetComponent<NetworkSceneManager>().ChangeServerScene("MyScene");
 
             string monster = GetArgValue("-monster");
             if (!string.IsNullOrEmpty(monster))
@@ -103,7 +104,7 @@ namespace Mirror.HeadlessBenchmark
             objectManager.Start();
             client.Transport = transport;
 
-            objectManager.RegisterPrefab(MonsterPrefab.GetComponent<NetworkIdentity>());
+          //  objectManager.RegisterPrefab(MonsterPrefab.GetComponent<NetworkIdentity>());
             objectManager.RegisterPrefab(PlayerPrefab.GetComponent<NetworkIdentity>());
 
             try
@@ -173,7 +174,7 @@ namespace Mirror.HeadlessBenchmark
                 Console.WriteLine("-server (will run in server only mode)");
                 Console.WriteLine("-client 1234 (will run the specified number of clients)");
                 Console.WriteLine("-transport tcp (transport to be used in test. add more by editing HeadlessBenchmark.cs)");
-                Console.WriteLine("-address example.com (will run the specified number of clients)");
+                Console.WriteLine("-address example.com (ip of server to connect to)");
                 Console.WriteLine("-port 1234 (port used by transport)");
                 Console.WriteLine("-monster 100 (number of monsters to spawn on the server)");
                 Console.WriteLine(" - Type 0 for default - ");
@@ -202,45 +203,6 @@ namespace Mirror.HeadlessBenchmark
                 kcpTransport = newTransport;
             }
 
-            if (transport != null && transport.Equals("enet"))
-            {
-                IgnoranceNG newTransport = networkManager.gameObject.AddComponent<IgnoranceNG>();
-
-                //Try to apply port if exists and needed by transport.
-                if (!string.IsNullOrEmpty(port))
-                {
-                    newTransport.Config.CommunicationPort = ushort.Parse(port);
-                }
-
-                networkManager.server.transport = newTransport;
-                networkManager.client.Transport = newTransport;
-            }
-
-            if (transport != null && transport.Equals("libuv2k"))
-            {
-                KcpTransport newTransport = networkManager.gameObject.AddComponent<KcpTransport>();
-
-                //Try to apply port if exists and needed by transport.
-                if (!string.IsNullOrEmpty(port))
-                {
-                    newTransport.Port = ushort.Parse(port);
-                }
-                networkManager.server.transport = newTransport;
-                networkManager.client.Transport = newTransport;
-            }
-
-            if (transport != null && transport.Equals("litelib"))
-            {
-                KcpTransport newTransport = networkManager.gameObject.AddComponent<KcpTransport>();
-
-                //Try to apply port if exists and needed by transport.
-                if (!string.IsNullOrEmpty(port))
-                {
-                    newTransport.Port = ushort.Parse(port);
-                }
-                networkManager.server.transport = newTransport;
-                networkManager.client.Transport = newTransport;
-            }
         }
 
         string GetArgValue(string name)
