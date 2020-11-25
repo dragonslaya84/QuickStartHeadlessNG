@@ -3,6 +3,7 @@ using System.Collections;
 using Mirror.KCP;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using Mirror.ENet;
 
 namespace Mirror.HeadlessBenchmark
 {
@@ -77,7 +78,7 @@ namespace Mirror.HeadlessBenchmark
         void OnServerStarted()
         {
             StartCoroutine(DisplayFramesPerSecons());
-            
+
             GetComponent<NetworkSceneManager>().ChangeServerScene("MyScene");
 
             string monster = GetArgValue("-monster");
@@ -99,9 +100,9 @@ namespace Mirror.HeadlessBenchmark
         {
             var clientGo = new GameObject($"Client {i}", typeof(NetworkClient), typeof(ClientObjectManager), typeof(NetworkSceneManager));
             NetworkClient client = clientGo.GetComponent<NetworkClient>();
-            GetComponent<NetworkSceneManager>().client = client;
+            clientGo.GetComponent<NetworkSceneManager>().client = client;
             ClientObjectManager objectManager = clientGo.GetComponent<ClientObjectManager>();
-            objectManager.networkSceneManager = GetComponent<NetworkSceneManager>();
+            objectManager.networkSceneManager = clientGo.GetComponent<NetworkSceneManager>();
             objectManager.client = client;
             objectManager.Start();
             client.Transport = transport;
@@ -202,8 +203,53 @@ namespace Mirror.HeadlessBenchmark
                 networkManager.server.transport = newTransport;
                 networkManager.client.Transport = newTransport;
 
+                newTransport.HashCashBits = 15;
+                newTransport.SendWindowSize = 256;
+                newTransport.ReceiveWindowSize = 8192;
+                newTransport.delayMode = KcpDelayMode.Fast3;
+
                 kcpTransport = newTransport;
             }
+            
+            if (transport != null && transport.Equals("enet"))
+             {
+                 IgnoranceNG newTransport = networkManager.gameObject.AddComponent<IgnoranceNG>();
+
+                  //Try to apply port if exists and needed by transport.
+                 if (!string.IsNullOrEmpty(port))
+                 {
+                     newTransport.Config.CommunicationPort = ushort.Parse(port);
+                 }
+
+                  networkManager.server.transport = newTransport;
+                 networkManager.client.Transport = newTransport;
+             }
+
+              if (transport != null && transport.Equals("libuv2k"))
+             {
+                 KcpTransport newTransport = networkManager.gameObject.AddComponent<KcpTransport>();
+
+                  //Try to apply port if exists and needed by transport.
+                 if (!string.IsNullOrEmpty(port))
+                 {
+                     newTransport.Port = ushort.Parse(port);
+                 }
+                 networkManager.server.transport = newTransport;
+                 networkManager.client.Transport = newTransport;
+             }
+
+              if (transport != null && transport.Equals("litelib"))
+             {
+                 KcpTransport newTransport = networkManager.gameObject.AddComponent<KcpTransport>();
+
+                  //Try to apply port if exists and needed by transport.
+                 if (!string.IsNullOrEmpty(port))
+                 {
+                     newTransport.Port = ushort.Parse(port);
+                 }
+                 networkManager.server.transport = newTransport;
+                 networkManager.client.Transport = newTransport;
+             }
 
         }
 
