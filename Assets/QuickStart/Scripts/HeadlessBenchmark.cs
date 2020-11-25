@@ -78,7 +78,7 @@ namespace Mirror.HeadlessBenchmark
         void OnServerStarted()
         {
             StartCoroutine(DisplayFramesPerSecons());
-            
+
             GetComponent<NetworkSceneManager>().ChangeServerScene("MyScene");
 
             string monster = GetArgValue("-monster");
@@ -100,9 +100,9 @@ namespace Mirror.HeadlessBenchmark
         {
             var clientGo = new GameObject($"Client {i}", typeof(NetworkClient), typeof(ClientObjectManager), typeof(NetworkSceneManager));
             NetworkClient client = clientGo.GetComponent<NetworkClient>();
-            GetComponent<NetworkSceneManager>().client = client;
+            clientGo.GetComponent<NetworkSceneManager>().client = client;
             ClientObjectManager objectManager = clientGo.GetComponent<ClientObjectManager>();
-            objectManager.networkSceneManager = GetComponent<NetworkSceneManager>();
+            objectManager.networkSceneManager = clientGo.GetComponent<NetworkSceneManager>();
             objectManager.client = client;
             objectManager.Start();
             client.Transport = transport;
@@ -191,7 +191,8 @@ namespace Mirror.HeadlessBenchmark
         {
             string transport = GetArgValue("-transport");
 
-            if (string.IsNullOrEmpty(transport) || transport.Equals("kcp"))
+           //string.IsNullOrEmpty(transport) ||  temp fix to stop it adding duplicate kcp transports
+            if (transport != null || transport.Equals("kcp"))
             {
                 KcpTransport newTransport = networkManager.gameObject.AddComponent<KcpTransport>();
 
