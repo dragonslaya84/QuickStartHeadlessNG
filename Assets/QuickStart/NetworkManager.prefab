@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3514731670737574417}
-  - component: {fileID: 9141984077511543551}
   - component: {fileID: 7281894880448912304}
   - component: {fileID: 2485347781113897125}
   - component: {fileID: 900059337203968083}
@@ -18,6 +17,7 @@ GameObject:
   - component: {fileID: 1938740708}
   - component: {fileID: 1938740714}
   - component: {fileID: 1938740715}
+  - component: {fileID: 1359728607}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -39,24 +39,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9141984077511543551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3514731670737574378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetworkManager: {fileID: 0}
-  NetworkAddress: localhost
-  NetworkAddressInput: {fileID: 0}
-  OfflineGO: {fileID: 0}
-  OnlineGO: {fileID: 0}
-  StatusLabel: {fileID: 0}
 --- !u!114 &7281894880448912304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f5ec068f5604c32b160bc49ee97b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxConnections: 4
+  MaxConnections: 1000
   Started:
     m_PersistentCalls:
       m_Calls: []
@@ -203,7 +185,8 @@ MonoBehaviour:
   MonsterPrefab: {fileID: 0}
   PlayerPrefab: {fileID: 3596890679962701276, guid: 964e9613f4a464cf6a0517eef7bf0b98,
     type: 3}
-  editorArgs: -transport kcp -server -port 3333 -frameRate 30 -traffic 0
+  editorArgs: -transport kcp -client 1 -address 127.0.0.1 -port 3333 -frameRate 30
+    -traffic 0
   kcpTransport: {fileID: 0}
 --- !u!114 &1938740715
 MonoBehaviour:
@@ -222,3 +205,25 @@ MonoBehaviour:
   sceneManager: {fileID: 900059337203968083}
   serverObjectManager: {fileID: 8886348169724755207}
   clientObjectManager: {fileID: 8182985097174544173}
+--- !u!114 &1359728607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3514731670737574378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7aaac73a16c040fd871cb977b5c557b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  client: {fileID: 7281894880448912304}
+  server: {fileID: 2485347781113897125}
+  sceneManager: {fileID: 900059337203968083}
+  clientObjectManager: {fileID: 8182985097174544173}
+  serverObjectManager: {fileID: 8886348169724755207}
+  playerPrefab: {fileID: 3105541664355310574, guid: 964e9613f4a464cf6a0517eef7bf0b98,
+    type: 3}
+  startPositionIndex: 0
+  startPositions: []
+  playerSpawnMethod: 0

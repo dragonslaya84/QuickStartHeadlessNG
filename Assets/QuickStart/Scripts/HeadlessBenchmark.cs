@@ -97,9 +97,11 @@ namespace Mirror.HeadlessBenchmark
 
         async UniTask StartClient(int i, Transport transport, string networkAddress)
         {
-            var clientGo = new GameObject($"Client {i}", typeof(NetworkClient), typeof(ClientObjectManager));
+            var clientGo = new GameObject($"Client {i}", typeof(NetworkClient), typeof(ClientObjectManager), typeof(NetworkSceneManager));
             NetworkClient client = clientGo.GetComponent<NetworkClient>();
+            GetComponent<NetworkSceneManager>().client = client;
             ClientObjectManager objectManager = clientGo.GetComponent<ClientObjectManager>();
+            objectManager.networkSceneManager = GetComponent<NetworkSceneManager>();
             objectManager.client = client;
             objectManager.Start();
             client.Transport = transport;
