@@ -543,8 +543,8 @@ MonoBehaviour:
   MonsterPrefab: {fileID: 0}
   PlayerPrefab: {fileID: 3596890679962701276, guid: 964e9613f4a464cf6a0517eef7bf0b98,
     type: 3}
-  editorArgs: -transport kcp -client 1 -address 127.0.0.1 -port 3333 -frameRate 15
-    -traffic 0
+  editorArgs: -transport enet -client 1 -address 127.0.0.1 -port 3333 -frameRate
+    15 -traffic 0
   kcpTransport: {fileID: 0}
 --- !u!114 &1522905735
 MonoBehaviour:
