@@ -309,7 +309,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 0
   serverOnly: 0
+  ServerObjectManager: {fileID: 0}
+  ClientObjectManager: {fileID: 0}
   m_AssetId: 
+  OnStartServer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartClient:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartLocalPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartAuthority:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopAuthority:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopClient:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopServer:
+    m_PersistentCalls:
+      m_Calls: []
   hasSpawned: 0
 --- !u!114 &1023361876758146775
 MonoBehaviour:
@@ -325,10 +348,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 1
-  localPositionSensitivity: 0.1
-  localRotationSensitivity: 0.1
-  localScaleSensitivity: 0.1
+  ClientAuthority: 1
+  LocalPositionSensitivity: 0.1
+  LocalRotationSensitivity: 0.1
+  LocalScaleSensitivity: 0.1
 --- !u!114 &-4822817084599817448
 MonoBehaviour:
   m_ObjectHideFlags: 0
