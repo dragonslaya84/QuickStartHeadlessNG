@@ -191,8 +191,7 @@ namespace Mirror.HeadlessBenchmark
         {
             string transport = GetArgValue("-transport");
 
-           //string.IsNullOrEmpty(transport) ||  temp fix to stop it adding duplicate kcp transports
-            if (transport != null || transport.Equals("kcp"))
+            if (string.IsNullOrEmpty(transport) || transport.Equals("kcp"))
             {
                 KcpTransport newTransport = networkManager.gameObject.AddComponent<KcpTransport>();
 
@@ -203,6 +202,11 @@ namespace Mirror.HeadlessBenchmark
                 }
                 networkManager.server.transport = newTransport;
                 networkManager.client.Transport = newTransport;
+
+                newTransport.HashCashBits = 15;
+                newTransport.SendWindowSize = 256;
+                newTransport.ReceiveWindowSize = 8192;
+                newTransport.delayMode = KcpDelayMode.Fast3;
 
                 kcpTransport = newTransport;
             }
