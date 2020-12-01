@@ -364,6 +364,72 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &567581953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 567581955}
+  - component: {fileID: 567581954}
+  - component: {fileID: 567581956}
+  m_Layer: 0
+  m_Name: HeadlessBenchmark
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &567581954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567581953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8f9c55c5814414a504f7f4eb8e9a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkManager: {fileID: 1522905733}
+  serverObjectManager: {fileID: 1522905736}
+  MonsterPrefab: {fileID: 4163948661500666956, guid: 9c31a2867e5fdfd41a11ff435f0c7d83,
+    type: 3}
+  PlayerPrefab: {fileID: 3596890679962701276, guid: 964e9613f4a464cf6a0517eef7bf0b98,
+    type: 3}
+  editorArgs: -transport enet -client 1 -address 127.0.0.1 -port 3333 -frameRate
+    15 -traffic 0
+  kcpTransport: {fileID: 0}
+--- !u!4 &567581955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567581953}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &567581956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567581953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bdbb066fe0e4a74fa881291f96bac11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverTickRate: 15
 --- !u!1 &594901267
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,15 +538,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1522905741}
-  - component: {fileID: 1522905740}
   - component: {fileID: 1522905739}
-  - component: {fileID: 1522905738}
-  - component: {fileID: 1522905737}
-  - component: {fileID: 1522905736}
-  - component: {fileID: 1522905735}
-  - component: {fileID: 1522905734}
+  - component: {fileID: 1522905740}
   - component: {fileID: 1522905733}
+  - component: {fileID: 1522905738}
+  - component: {fileID: 1522905734}
   - component: {fileID: 1522905732}
+  - component: {fileID: 1522905736}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -497,19 +561,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1522905731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7aaac73a16c040fd871cb977b5c557b, type: 3}
+  m_Script: {fileID: 11500000, guid: a2cbc85c1c2f1c249bbe95ae110bbcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   client: {fileID: 1522905740}
-  server: {fileID: 1522905739}
-  sceneManager: {fileID: 1522905738}
-  clientObjectManager: {fileID: 1522905737}
-  serverObjectManager: {fileID: 1522905736}
-  playerPrefab: {fileID: 3105541664355310574, guid: 964e9613f4a464cf6a0517eef7bf0b98,
-    type: 3}
-  startPositionIndex: 0
-  startPositions: []
-  playerSpawnMethod: 0
+  networkSceneManager: {fileID: 1522905738}
+  spawnPrefabs: []
 --- !u!114 &1522905733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,7 +583,7 @@ MonoBehaviour:
   client: {fileID: 1522905740}
   sceneManager: {fileID: 1522905738}
   serverObjectManager: {fileID: 1522905736}
-  clientObjectManager: {fileID: 1522905737}
+  clientObjectManager: {fileID: 1522905732}
 --- !u!114 &1522905734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,31 +593,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1522905731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c8f9c55c5814414a504f7f4eb8e9a21, type: 3}
+  m_Script: {fileID: 11500000, guid: a7aaac73a16c040fd871cb977b5c557b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkManager: {fileID: 1522905733}
+  client: {fileID: 1522905740}
+  server: {fileID: 1522905739}
+  sceneManager: {fileID: 1522905738}
+  clientObjectManager: {fileID: 1522905732}
   serverObjectManager: {fileID: 1522905736}
-  MonsterPrefab: {fileID: 4163948661500666956, guid: 9c31a2867e5fdfd41a11ff435f0c7d83,
+  playerPrefab: {fileID: 3105541664355310574, guid: 964e9613f4a464cf6a0517eef7bf0b98,
     type: 3}
-  PlayerPrefab: {fileID: 3596890679962701276, guid: 964e9613f4a464cf6a0517eef7bf0b98,
-    type: 3}
-  editorArgs: -transport enet -client 1 -address 127.0.0.1 -port 3333 -frameRate
-    15 -traffic 0
-  kcpTransport: {fileID: 0}
---- !u!114 &1522905735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522905731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bdbb066fe0e4a74fa881291f96bac11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serverTickRate: 15
+  startPositionIndex: 0
+  startPositions: []
+  playerSpawnMethod: 0
 --- !u!114 &1522905736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,21 +620,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   server: {fileID: 1522905739}
   networkSceneManager: {fileID: 1522905738}
---- !u!114 &1522905737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522905731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2cbc85c1c2f1c249bbe95ae110bbcde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  client: {fileID: 1522905740}
-  networkSceneManager: {fileID: 1522905738}
-  spawnPrefabs: []
 --- !u!114 &1522905738
 MonoBehaviour:
   m_ObjectHideFlags: 0

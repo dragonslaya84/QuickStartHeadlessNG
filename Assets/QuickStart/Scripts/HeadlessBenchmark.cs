@@ -21,6 +21,8 @@ namespace Mirror.HeadlessBenchmark
 
         void Start()
         {
+            DontDestroyOnLoad(gameObject);
+
             cachedArgs = Environment.GetCommandLineArgs();
 
 #if UNITY_EDITOR
@@ -77,9 +79,9 @@ namespace Mirror.HeadlessBenchmark
 
         void OnServerStarted()
         {
-            StartCoroutine(DisplayFramesPerSecons());
+            networkManager.GetComponent<NetworkSceneManager>().ChangeServerScene("MyScene");
 
-            GetComponent<NetworkSceneManager>().ChangeServerScene("MyScene");
+            StartCoroutine(DisplayFramesPerSecons());
 
             string monster = GetArgValue("-monster");
             if (!string.IsNullOrEmpty(monster))
@@ -98,25 +100,31 @@ namespace Mirror.HeadlessBenchmark
 
         async UniTask StartClient(int i, Transport transport, string networkAddress)
         {
-            var clientGo = new GameObject($"Client {i}", typeof(NetworkClient), typeof(ClientObjectManager), typeof(NetworkSceneManager));
+            var clientGo = new GameObject($"Client {i}", typeof(NetworkClient), typeof(ClientObjectManager));
+            DontDestroyOnLoad(clientGo);
             NetworkClient client = clientGo.GetComponent<NetworkClient>();
-            clientGo.GetComponent<NetworkSceneManager>().client = client;
             ClientObjectManager objectManager = clientGo.GetComponent<ClientObjectManager>();
+            objectManager.client = client;
 
-            GetComponent<PlayerSpawner>().client = client;
+            var nsm = networkManager.GetComponent<NetworkSceneManager>();
+            nsm.client = client;
+
+            var playerSpawner = networkManager.GetComponent<PlayerSpawner>();
+            playerSpawner.client = client;
+            playerSpawner.clientObjectManager = objectManager;
+            playerSpawner.sceneManager = nsm;
+
+            objectManager.networkSceneManager = nsm;
+            objectManager.Start();
+            client.Transport = transport;
 
             objectManager.RegisterPrefab(MonsterPrefab.GetComponent<NetworkIdentity>());
             objectManager.RegisterPrefab(PlayerPrefab.GetComponent<NetworkIdentity>());
 
-            objectManager.networkSceneManager = clientGo.GetComponent<NetworkSceneManager>();
-            objectManager.client = client;
-            objectManager.Start();
-            client.Transport = transport;
-
             try
             {
                 await client.ConnectAsync(networkAddress);
-                client.Send(new AddPlayerMessage());
+                //client.Send(new AddPlayerMessage());
             }
             catch (Exception ex)
             {
@@ -222,6 +230,7 @@ namespace Mirror.HeadlessBenchmark
                 if (!string.IsNullOrEmpty(port))
                 {
                     newTransport.Config.CommunicationPort = ushort.Parse(port);
+                    newTransport.Config.EnetPollTimeout = 1;
                 }
 
                 networkManager.server.transport = newTransport;
